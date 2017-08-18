@@ -1,0 +1,20 @@
+{
+    "name": "kilingzhang/netease-cloud-music-api",
+    "authors": [
+        {
+            "name": "kilingzhang",
+            "email": "slight@kilingzhang.com"
+        }
+    ],
+    "description": "网易云音乐 PHP 版 API",
+    "keywords": [
+        "网易云音乐",
+        "网易云",
+        "音乐",
+        "网易云音乐PHP"
+    ],
+    "require": {
+
+    },
+    "license": "MIT"
+}
