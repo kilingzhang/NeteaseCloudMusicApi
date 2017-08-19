@@ -167,4 +167,4 @@ return [
 
 
 ## License
-[The MIT License (MIT)]("https://github.com/kilingzhang/NeteaseCloudMusicApi/blob/master/LICENSE")
+[The MIT License (MIT)](https://github.com/kilingzhang/NeteaseCloudMusicApi/blob/master/LICENSE)
