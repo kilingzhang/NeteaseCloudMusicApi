@@ -1,22 +1,22 @@
-#网易云音乐 API#
+# 网易云音乐 API
 
-##描述
+## 描述
 
 网易云音乐 API
 
 网易云音乐 PHP 版 API
 
 
-##灵感来自
+## 灵感来自
 
 - [Binaryify/NeteaseCloudMusicApi]("https://binaryify.github.io/NeteaseCloudMusicApi/")
 - [metowolf/NeteaseCloudMusicApi]("https://github.com/metowolf/NeteaseCloudMusicApi")
 
-##log
+## log
 
-##功能
-1. 登录 -
-2. 刷新登录 -
+## 功能
+1. 登录 ---
+2. 刷新登录 ---
 3. 获取用户信息,歌单，收藏，mv, dj 数量 -
 4. 获取用户歌单 -
 5. 获取用户电台 -
@@ -77,10 +77,10 @@
 60. 给评论点赞 -
 61. 获取动态 -
 
-##环境要求
+## 环境要求
 
 
-##安装
+## 安装
 
 
 
@@ -99,7 +99,7 @@
 
 ```
 
-##引入运行
+## 引入运行
 
 > 在根目录下 index.php 引入
 
@@ -162,9 +162,9 @@ return [
 
 ```
 
-##使用文档
+## 使用文档
 
 
 
-##License
+## License
 [The MIT License (MIT)]("https://github.com/kilingzhang/NeteaseCloudMusicApi/blob/master/LICENSE")
