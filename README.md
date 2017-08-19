@@ -9,8 +9,8 @@
 
 ## 灵感来自
 
-- [Binaryify/NeteaseCloudMusicApi]("https://binaryify.github.io/NeteaseCloudMusicApi/")
-- [metowolf/NeteaseCloudMusicApi]("https://github.com/metowolf/NeteaseCloudMusicApi")
+- [Binaryify/NeteaseCloudMusicApi](https://binaryify.github.io/NeteaseCloudMusicApi/)
+- [metowolf/NeteaseCloudMusicApi](https://github.com/metowolf/NeteaseCloudMusicApi)
 
 ## log
 
