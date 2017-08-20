@@ -93,7 +93,7 @@
     
     {
         "require": {
-    		"kilingzhang/netease-cloud-music-api": "^0.1.0"
+    		"kilingzhang/netease-cloud-music-api": "^0.5.0"
         }
     }
 
