@@ -219,7 +219,7 @@
 ## 使用文档
 
 [在线文档](https://kilingzhang.github.io/NeteaseCloudMusicApi/)
-
+![docs](http://markdown-1252847423.file.myqcloud.com/docs.png)
 
     
 
@@ -229,3 +229,6 @@
 
 ## License
 [The MIT License (MIT)](https://github.com/kilingzhang/NeteaseCloudMusicApi/blob/master/LICENSE)
+
+
+  [1]: http://markdown-1252847423.costj.myqcloud.com/docs.png
