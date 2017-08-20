@@ -1,21 +1,21 @@
 # 网易云音乐 API
 
-[![Latest Stable Version](https://poser.pugx.org/kilingzhang/netease-cloud-music-api/v/stable)](https://packagist.org/packages/kilingzhang/netease-cloud-music-api)
-[![Latest Unstable Version](https://poser.pugx.org/kilingzhang/netease-cloud-music-api/v/unstable)](https://packagist.org/packages/kilingzhang/netease-cloud-music-api)
-[![License](https://poser.pugx.org/kilingzhang/netease-cloud-music-api/license)](https://packagist.org/packages/kilingzhang/netease-cloud-music-api)
+[![Latest Stable Version](https://poser.pugx.org/kilingzhang/netease-cloud-music-api/v/stable)](https://packagist.org/packages/kilingzhang/netease-cloud-music-api) [![Latest Unstable Version](https://poser.pugx.org/kilingzhang/netease-cloud-music-api/v/unstable)](https://packagist.org/packages/kilingzhang/netease-cloud-music-api) [![License](https://poser.pugx.org/kilingzhang/netease-cloud-music-api/license)](https://packagist.org/packages/kilingzhang/netease-cloud-music-api)
 ## 描述
 
 网易云音乐 API
-
 网易云音乐 PHP 版 API
-
+跨站请求伪造 (CSRF), 伪造请求头,调用网易云音乐官方 API
 
 ## 灵感来自
+曾经用过[@metowolf](https://github.com/metowolf/NeteaseCloudMusicApi)大大的网易接口，也是我搞网易云音乐接口的启蒙。本来想用此接口仿写个网易云音乐app。但是接口不全最后写到一半放弃了。直到遇到[@Binaryify](https://binaryify.github.io/NeteaseCloudMusicApi/)大大的nodejs版60+的API。感觉发现了新大陆/\*哈哈哈哈\*/。可是美中不足的就是这是nodejs，我一个phper当然想用php来实现。所以直接照搬了[@Binaryify](https://binaryify.github.io/NeteaseCloudMusicApi/)大大的接口，改成了PHP版本。也方便日后phper直接来使用。
 
 - [Binaryify/NeteaseCloudMusicApi](https://binaryify.github.io/NeteaseCloudMusicApi/)
 - [metowolf/NeteaseCloudMusicApi](https://github.com/metowolf/NeteaseCloudMusicApi)
 
 ## log
+
+- 2017-08-21 nodejs版接口基本完成php的转换
 
 ## 功能
 1.  登录 
@@ -80,76 +80,150 @@
 60.  给评论点赞 
 61.  获取动态 
 
-## 环境要求
+## 说明
+
+>本接口依照RESTful规范设计（并不完全 - -|| ），依赖[PhpBoot](https://github.com/kilingzhang/phpboot)框架。所以下文会存在一些配置[PhpBoot](https://github.com/kilingzhang/phpboot)框架的操作。
+
+## 环境要求（[PhpBoot](https://github.com/kilingzhang/phpboot)）
+
+- PHP 版本 >= 5.5.9
+- APC 扩展启用
+
+```
+    apc.enable=1
+```
+
+- 如果启用了OPcache，应同时配置以下选项：
+
+```
+    opcache.save_comments=1
+    opcache.load_comments=1
+```
 
 
 ## 安装
 
-
-## Api配置
-
-> Api目录下 index.php 配置项
-
-```
-
-    require_once "../vendor/autoload.php";
-    use PhpBoot\Docgen\Swagger\Swagger;
-    use PhpBoot\Docgen\Swagger\SwaggerProvider;
-    use PhpBoot\Application;
-    use PhpBoot\Controller\Hooks\Cors;
-    ini_set('date.timezone','Asia/Shanghai');
+1. 安装 composer (已安装可忽略)
     
-    // 加载配置
-    $app = \PhpBoot\Application::createByDefault(
-        'config.php'
-    );
+        curl -s http://getcomposer.org/installer | php
     
-    
-    //接口文档自动导出功能, 如果要关闭此功能, 只需注释掉这块代码{{
-    SwaggerProvider::register($app, function(Swagger $swagger)use($app){
-        $swagger->schemes = ['http'];
-        $swagger->host = $app->get('host');
-        $swagger->info->title = '网易云音乐API';
-        $swagger->info->description = "网易云音乐API-SDK";
-    });
-    //}}
-    $app->loadRoutesFromPath( '../src/NeteaseCloudMusicApiSdk', 'NeteaseCloudMusicApiSdk');
-    
-    //执行请求
-    $app->dispatch();
+2. 安装 NeteaseCloudMusicApi
 
+        git clone https://github.com/kilingzhang/NeteaseCloudMusicApi.git
+
+3. 安装[PhpBoot](https://github.com/kilingzhang/phpboot)依赖
+
+        cd NeteaseCloudMusicApi
+        composer install 
+
+
+## 配置
+
+1. WebServer 配置([PhpBoot](https://github.com/kilingzhang/phpboot))
+    1. Nginx
+        
+            server {
+                listen 80;
+                server_name example.com;
+                index index.php;
+                error_log /path/to/example.error.log;
+                access_log /path/to/example.access.log;
+                root /path/to/public;
+            
+                location / {
+                    try_files $uri /index.php$is_args$args;
+                }
+            
+                location ~ \.php {
+                    try_files $uri =404;
+                    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                    include fastcgi_params;
+                    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                    fastcgi_param SCRIPT_NAME $fastcgi_script_name;
+                    fastcgi_index index.php;
+                    fastcgi_pass 127.0.0.1:9000;
+                }
+            }        
+
+    2. Apache
+        >Apache 的配置稍微复杂，首先你需要启 mod_rewrite 模块，然后在 index.php 目录下添加 .htaccess 文件：
+        
+            Options +FollowSymLinks
+            RewriteEngine On
+            
+            RewriteCond %{REQUEST_FILENAME} !-d
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteRule ^ index.php [L]
+        
+        >另外还需要修改虚拟主机的AllowOverride配置:
+        
+            AllowOverride All
+            
+    >注：以上配置为[PhpBoot](https://github.com/kilingzhang/phpboot)框架需求的配置，由于 WebServer 版本的差异， 以上配置可能不能按预期工作，但这是使用多数 PHP 框架第一步需要解决的问题， 网上有会有很多解决方案，用好搜索引擎即可
     
-    
-    
-```
+2. 接口选项配置([PhpBoot](https://github.com/kilingzhang/phpboot))
+    1. 配置文件 (`Config.php`)
+    > [PhpBoot](https://github.com/kilingzhang/phpboot)的配置文件配置，如果熟悉此框架的可以略过自行配置，如果不熟悉的phper的可以直接使用默认的配置。    
 
-> config.php
-```
-return [
-    //App
-    'host' => 'api.netease.com',
-    'basePath' => '/doc',
-
-    //DB
-    'DB.connection'=> 'mysql:dbname=phpboot-example;host=127.0.0.1',
-    'DB.username'=> 'root',
-    'DB.password'=> '',
-    'DB.options' => [],
-//    // 如果要将系统缓存改成文件方式, 取消下面的注释。默认系统缓存是 APC
-//    // 注意这里的系统缓存指路由、依赖注入方式等信息的缓存, 而不是业务接口返回数据的缓存。
-//    // 所以这里不要使用 redis 等远程缓存
-//    \Doctrine\Common\Cache\Cache::class =>
-//        \DI\object(\Doctrine\Common\Cache\FilesystemCache::class)
-//            ->constructorParameter('directory', sys_get_temp_dir()),
-
-    //异常输出类
-    \PhpBoot\Controller\ExceptionRenderer::class =>
-        \DI\object(\Utils\ExceptionRenderer::class)
-];
-
-```
+            return [
+                    //App
+                    //换成自己服务器域名
+                    'host' => 'example.com',
+                    //DB 
+                    'DB.connection'=> 'mysql:dbname=phpboot-example;host=127.0.0.1',
+                    'DB.username'=> 'root',
+                    'DB.password'=> '',
+                    'DB.options' => [],
+                    // 如果要将系统缓存改成文件方式, 取消下面的注释。默认系统缓存是 APC
+                    // 注意这里的系统缓存指路由、依赖注入方式等信息的缓存, 而不是业务接口返回数据的缓存。
+                    // 所以这里不要使用 redis 等远程缓存
+                    // \Doctrine\Common\Cache\Cache::class =>
+                    // \DI\object(\Doctrine\Common\Cache\FilesystemCache::class)->constructorParameter('directory', sys_get_temp_dir()),
+                
+                    //异常输出类
+                    \PhpBoot\Controller\ExceptionRenderer::class =>
+                    \DI\object(\Utils\ExceptionRenderer::class)
+                ];
+            
+    2. 文档输出配置 (`index.php`)
+    > [PhpBoot](https://github.com/kilingzhang/phpboot)的配置文件配置，如果熟悉此框架的可以略过自行配置，如果不熟悉的phper的可以直接使用默认的配置。
+            
+                require_once "Autoloader.php";
+                require_once "vendor/autoload.php";
+                use PhpBoot\Docgen\Swagger\Swagger;
+                use PhpBoot\Docgen\Swagger\SwaggerProvider;
+                use PhpBoot\Application;
+                use PhpBoot\Controller\Hooks\Cors;
+                header("Content-Type: charset=utf-8");
+                ini_set('date.timezone','Asia/Shanghai');
+                
+                // 加载配置
+                $app = \PhpBoot\Application::createByDefault(
+                    'Config.php'
+                );
+                
+                
+                //接口文档自动导出功能, 如果要关闭此功能, 只需注释掉这块代码{{
+                SwaggerProvider::register($app, function(Swagger $swagger)use($app){
+                    $swagger->schemes = ['http'];
+                    $swagger->host = $app->get('host');
+                    $swagger->info->title = '网易云音乐API';
+                    $swagger->info->description = "网易云音乐API-PHPSDK";
+                });
+                //}}
+                $app->loadRoutesFromPath( 'src/NeteaseCloudMusicApiSdk', 'NeteaseCloudMusicApiSdk');
+                
+                //执行请求
+                $app->dispatch();
 
 ## 使用文档
+
+[在线文档](https://github.com/kilingzhang/NeteaseCloudMusicApi/blob/master/LICENSE)
+
+
+    
+
+## Swagger文档输出
 
 
 

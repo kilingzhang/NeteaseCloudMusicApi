@@ -254,7 +254,7 @@ class Top
      * @param int $idx
      * @return string json
      */
-    public function List($idx)
+    public function TopList($idx)
     {
         $top_list_all = array(
             array('云音乐新歌榜', '/api/playlist/detail?id=3779629'),

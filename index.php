@@ -6,18 +6,18 @@
  * Time: 14:25
  */
 
-require_once "../Autoloader.php";
-require_once "../vendor/autoload.php";
+require_once "Autoloader.php";
+require_once "vendor/autoload.php";
 use PhpBoot\Docgen\Swagger\Swagger;
 use PhpBoot\Docgen\Swagger\SwaggerProvider;
 use PhpBoot\Application;
 use PhpBoot\Controller\Hooks\Cors;
-header("Content-type:charset=utf8");
+header("Content-Type: charset=utf-8");
 ini_set('date.timezone','Asia/Shanghai');
 
 // 加载配置
 $app = \PhpBoot\Application::createByDefault(
-    'config.php'
+    'Config.php'
 );
 
 
@@ -29,7 +29,7 @@ SwaggerProvider::register($app, function(Swagger $swagger)use($app){
     $swagger->info->description = "网易云音乐API";
 });
 //}}
-$app->loadRoutesFromPath( '../src/NeteaseCloudMusicApiSdk', 'NeteaseCloudMusicApiSdk');
+$app->loadRoutesFromPath( 'src/NeteaseCloudMusicApiSdk', 'NeteaseCloudMusicApiSdk');
 
 //执行请求
 $app->dispatch();
