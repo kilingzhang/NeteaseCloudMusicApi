@@ -86,25 +86,9 @@
 ## 安装
 
 
+## Api配置
 
-```
-
-    composer require kilingzhang/netease-cloud-music-api
-    
-    {
-        "require": {
-    		"kilingzhang/netease-cloud-music-api": "^0.5.0"
-        }
-    }
-
-    
-    
-
-```
-
-## 引入运行
-
-> 在根目录下 index.php 引入
+> Api目录下 index.php 配置项
 
 ```
 
