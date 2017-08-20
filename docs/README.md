@@ -213,7 +213,24 @@
                 //执行请求
                 $app->dispatch();
 
+
+## Swagger文档输出
+
+### 接口测试文档
+
+swagger
+
+```
+url + /docs/swagger.json
+```
+
+
 ## 使用文档
+
+### 测试地址
+>暂时不想开放 ···
+
+
 
 ### 调用前须知
 
@@ -229,7 +246,7 @@
 `/login/cellphone`  
 
 **调用例子:**  
-`/login/cellphone?phone=xxx&password=yyy`  
+`/login/cellphone?phone=xxx&pw=yyy`  
 
 #### 2. 邮箱登录  
 注意:此接口被网易和谐了,待修复,暂时使用手机登录(2017.05.20)  
@@ -242,10 +259,10 @@
 `/login`  
 
 **调用例子:**  
-`/login?email=xxx@163.com&password=yyy`  
+`/login?email=xxx@163.com&pw=yyy`  
 
 返回数据如下图:  
-![登录](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/%E7%99%BB%E5%BD%95.png)
+
 
 
 完成登录后,会在浏览器保存一个 Cookies 用作登录凭证,大部分 API 都需要用到这个 Cookies
@@ -269,7 +286,7 @@
 `/user/detail`  
 
 **调用例子:**  
-`/user/detail?uid=32953014`  
+`/user/detail?uid=251183635`  
 
 
 ### 获取用户信息,歌单，收藏，mv, dj 数量
@@ -282,7 +299,7 @@
 `/user/subcount`  
 
 **调用例子:**  
-`/user/subcount?uid=32953014`  
+`/user/subcount?uid=251183635`  
 
 
 ### 获取用户歌单
@@ -295,10 +312,10 @@
 `/user/playlist`  
 
 **调用例子:**  
-`/user/playlist?uid=32953014`  
+`/user/playlist?uid=251183635`  
 
 返回数据如下图:  
-![用户歌单](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/%E7%94%A8%E6%88%B7%E6%AD%8C%E5%8D%95.png)
+
 
 ### 获取用户电台
 说明:登陆后调用此接口,传入用户 id, 可以获取用户电台  
@@ -310,7 +327,7 @@
 `/user/dj`  
 
 **调用例子:**  
-`/user/dj?uid=32953014`  
+`/user/dj?uid=251183635`  
 
 ### 获取用户关注列表  
 说明:登陆后调用此接口,传入用户 id, 可以获取用户关注列表  
@@ -326,7 +343,7 @@
 `/user/follows`  
 
 **调用例子:**  
-`/user/follows?uid=32953014` 
+`/user/follows?uid=251183635` 
 
 ### 获取用户粉丝列表  
 说明:登陆后调用此接口,传入用户 id, 可以获取用户粉丝列表  
@@ -342,7 +359,7 @@
 `/user/followeds`  
 
 **调用例子:**  
-`/user/followeds?uid=32953014` 
+`/user/followeds?uid=251183635` 
 
 ### 获取用户动态
 说明:登陆后调用此接口,传入用户 id, 可以获取用户动态
@@ -354,7 +371,7 @@
 `/user/event`  
 
 **调用例子:**  
-`/user/event?uid=32953014` 
+`/user/event?uid=251183635` 
 
 ### 获取用户播放记录
 说明:登陆后调用此接口,传入用户 id,可获取用户播放记录
@@ -369,7 +386,7 @@
 `/user/record`  
 
 **调用例子:**  
-`/user/record?uid=32953014&type=1` 
+`/user/record?uid=251183635&type=1` 
 
 ### 获取动态消息
 说明:调用此接口,可获取各种动态,对应网页版网易云，朋友界面里的各种动态消息，如分享的视频，音乐，照片等！ 
@@ -411,7 +428,7 @@
 `/playlist/detail?id=24381616`  
 
 返回数据如下图:  
-![歌单详情](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/%E6%AD%8C%E5%8D%95%E8%AF%A6%E6%83%85.png)
+
 
 ### 获取音乐 url
 说明:使用歌单详情接口后,能得到的音乐的 id, 但不能得到的音乐 url, 调用此接口,传入的音乐 id(可多个,用逗号隔开),可以获取对应的音乐的 url(不需要登录)  
@@ -423,11 +440,11 @@
 `/music/url`  
 
 **调用例子:**  
-`/music/url?id=347230`  
-`/music/url?id=347230,347231` 
+`/music/url?ids=437250607`  
+`/music/url?ids=437250607,448184048` 
 
 返回数据如下图:  
-![音乐 url](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/%E9%9F%B3%E4%B9%90%20url.png)
+
 
 ### 搜索
 说明:调用此接口,传入搜索关键词可以搜索该音乐/专辑/歌手/歌单/用户,关键词可以多个,以空格隔开,如"周杰伦 搁浅"(不需要登录),搜索获取的 mp3url 不能直接用,可通过 `/music/url` 接口传入歌曲 id 获取具体的播放链接  
@@ -455,10 +472,10 @@
 `/search`  
 
 **调用例子:**  
-`/search?keywords=海阔天空`  
+`/search?keywords=我的一个道姑朋友`  
 
 返回数据如下图: 
-![搜索音乐](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/%E6%90%9C%E7%B4%A2.png)
+
 
 ### 搜索建议
 说明:调用此接口,传入搜索关键词可获得搜索建议,搜索结果同时包含单曲,歌手,歌单,mv 信息 
@@ -486,7 +503,7 @@
 `/search/suggest`  
 
 **调用例子:**  
-`/search/suggest?keywords=海阔天空`  
+`/search/suggest?keywords=`  
 
 ### 搜索多重匹配
 说明:调用此接口,传入搜索关键词可获得搜索结果  
@@ -498,7 +515,7 @@
 `/search/multimatch`  
 
 **调用例子:**  
-`/search/multimatch?keywords=海阔天空`    
+`/search/multimatch?keywords=我的一个道姑朋友`    
 
 ### 收藏单曲到歌单
 说明:调用此接口,传入音乐 id和 limit 参数, 可获得该专辑的所有评论(需要登录)  
@@ -512,7 +529,7 @@
 `/playlist/tracks`  
 
 **调用例子:**  
-`/playlist/tracks?op=add&pid=24381616&tracks=347230` (对应把'海阔天空'添加到'我'的歌单,测试的时候请把这里的 pid换成你自己的)
+`/playlist/tracks?op=add&pid=24381616&tracks=437250607` 
 
 
 ### 获取歌词
@@ -525,10 +542,10 @@
 `/lyric`  
 
 **调用例子:**  
-`/lyric?id=347230`  
+`/lyric?id=437250607`  
 
 返回数据如下图: 
-![获取歌词](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/%E6%AD%8C%E8%AF%8D.png)
+
 
 ### 歌曲评论
 说明:调用此接口,传入音乐 id和 limit 参数, 可获得该音乐的所有评论(不需要登录)  
@@ -545,10 +562,9 @@
 `/comment/music`  
 
 **调用例子:**  
-`/comment/music?id=186016&limit=1` 对应晴天评论 
+`/comment/music?id=437250607&limit=1` 对应晴天评论 
 
 返回数据如下图: 
-![获取评论](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/comment.png)
 
 
 ### 专辑评论
@@ -644,11 +660,11 @@
 `comment/like`  
 
 **调用例子:**  
-`/comment/like?id=186016&cid=4956438&t=1&type=0` 对应给晴天最热门的那条评论点赞
+`/comment/like?id=437250607&cid= &t=1&type=0` 对应给我的一个道姑朋友最热门的那条评论点赞
 
 ### banner
 说明:调用此接口,可获取 banner(轮播图)数据   
-注:因参数未知,只能获取比较旧的数据,如果有知道参数的小伙伴,可提交 PR
+
 
 **接口地址:**  
 `/banner`  
@@ -660,16 +676,16 @@
 说明:调用此接口,传入音乐 id, 可获得歌曲详情    
 
 **必选参数:**  
-`ids`: 音乐 id,如 `ids=347230` 
+`ids`: 音乐 id,如 `ids=437250607` 
 
 **接口地址:**  
 `/song/detail`  
 
 **调用例子:**  
-`/song/detail?ids=347230`  
+`/song/detail?ids=437250607`  
 
 返回数据如下图: 
-![获取歌曲详情](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/songDetail.png)
+
 
 
 ### 获取专辑内容
@@ -685,7 +701,7 @@
 `/album?id=32311`  
 
 返回数据如下图: 
-![获取专辑内容](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/%E4%B8%93%E8%BE%91.png)
+
 
 ### 获取歌手单曲
 说明:调用此接口,传入歌手 id,可获得歌手单曲
@@ -700,7 +716,7 @@
 `/artists?id=6452`  
 
 返回数据如下图: 
-![获取歌手单曲](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/artists.png)
+
 
 ### 获取歌手 mv
 说明:调用此接口,传入歌手 id,可获得歌手 mv 信息,具体 mv 播放地址可调用`/mv`传入此接口获得的mvid 来拿到,如:
@@ -733,7 +749,7 @@
 `/artist/album?id=6452&limit=30` (周杰伦)
 
 返回数据如下图: 
-![获取专辑内容](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/artist_album.png)
+
 
 ### 获取歌手描述
 说明:调用此接口,传入歌手 id,可获得歌手描述
@@ -769,7 +785,7 @@
 `/simi/playlist`  
 
 **调用例子:**  
-`/simi/playlist?id=347230` (对应'光辉岁月'相似歌单)
+`/simi/playlist?id=437250607` (对应'光辉岁月'相似歌单)
 
 
 ### 相似 mv
@@ -794,7 +810,7 @@
 `/simi/song`  
 
 **调用例子:**  
-`/simi/song?id=347230` (对应'光辉岁月'相似歌曲)
+`/simi/song?id=437250607` (对应'光辉岁月'相似歌曲)
 
 ### 获取最近5个听了这首歌的用户
 说明:调用此接口,传入歌曲 id,最近5个听了这首歌的用户
@@ -806,7 +822,7 @@
 `/simi/user`  
 
 **调用例子:**  
-`/simi/user?id=347230` (对应'光辉岁月'相似歌曲)
+`/simi/user?id=437250607` (对应'光辉岁月'相似歌曲)
 
 
 ### 获取每日推荐歌单
@@ -819,7 +835,7 @@
 `/recommend/resource`  
 
 返回数据如下图: 
-![每日推荐歌单](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/%E6%8E%A8%E8%8D%90%E6%AD%8C%E5%8D%95.png)
+
 
 ### 获取每日推荐歌曲
 说明:调用此接口,可获得每日推荐歌曲(需要登录)  
@@ -831,7 +847,6 @@
 `/recommend/songs`  
 
 返回数据如下图: 
-![每日推荐歌曲](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/%E6%8E%A8%E8%8D%90%E6%AD%8C%E6%9B%B2.png)
 
 
 ### 私人 FM
@@ -845,7 +860,6 @@
 
 返回数据如下图: 
 
-![私人 FM](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/personal_fm.png)
 
 ### 签到
 说明:调用此接口,传入签到类型(可不传,默认安卓端签到),可签到(需要登录),其中安卓端签到可获得3点经验, web/PC 端签到可获得2点经验  
@@ -860,9 +874,7 @@
 
 返回数据如下图: 
 
-![签到成功](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/signinSuccess.png)
 
-![签到失败](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/signinError.png)
 
 
 ### 喜欢音乐
@@ -878,15 +890,15 @@
 `/like`  
 
 **调用例子:**  
-`/like?id=347230`  
+`/like?id=437250607`  
 
 返回数据如下图: 
 
-![喜欢成功](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/like.png)
+
 
 喜欢成功则返回数据的 code 为200,其余为失败
 
-![喜欢成功截图](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/likeSuccess.png)
+
 
 
 
@@ -900,11 +912,10 @@
 `/fm_trash`  
 
 **调用例子:**  
-`/fm_trash?id=347230`  
+`/fm_trash?id=437250607`  
 
 返回数据如下图: 
 
-![移除成功](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/fm_trash.png)
 
 ### 歌单(网友精选碟)
 说明:调用此接口,可获取网友精选碟歌单  
@@ -920,7 +931,7 @@
 
 返回数据如下图: 
 
-![精选碟](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/top_playlist.png)
+
 
 ### 新碟上架
 说明:调用此接口,可获取新碟上架列表,如需具体音乐信息需要调用获取专辑列表接口 `/album` ,然后传入 id, 如 `/album?id=32311&limit=30`     
@@ -938,7 +949,7 @@
 
 返回数据如下图: 
 
-![新碟上架](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/new_albums.png)
+
 
 ### 热门歌手
 说明:调用此接口,可获取热门歌手数据 
@@ -956,7 +967,7 @@
 
 返回数据如下图: 
 
-![热门歌手](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/top_artists.png)
+
 
 ### 最新 mv
 说明:调用此接口,可获取最新 mv
@@ -1053,7 +1064,7 @@
 
 返回数据如下图: 
 
-![热门歌手](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/mv.png)
+
 
 
 ### 播放 mv
@@ -1070,7 +1081,7 @@
 
 如下图: 
 
-![播放视频](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/play_mv.png)
+
 
 
 ### 排行榜
@@ -1112,7 +1123,7 @@
 
 返回数据如下图: 
 
-![排行榜](https://raw.githubusercontent.com/Binaryify/NeteaseCloudMusicApi/master/static/top_list.png)
+
 
 
 ### 云盘
@@ -1193,6 +1204,8 @@
 
 
 
+
+
 ## 离线访问此文档
 此文档同时也是 Progressive Web Apps(PWA), 加入了serviceWorker,可离线访问
 
@@ -1204,7 +1217,6 @@ docsify 是一个动态生成文档网站的工具。不同于 GitBook、Hexo �
 
     
 
-## Swagger文档输出
 
 
 
