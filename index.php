@@ -12,7 +12,6 @@ use PhpBoot\Docgen\Swagger\Swagger;
 use PhpBoot\Docgen\Swagger\SwaggerProvider;
 use PhpBoot\Application;
 use PhpBoot\Controller\Hooks\Cors;
-header("Content-Type: charset=utf-8");
 ini_set('date.timezone','Asia/Shanghai');
 
 // 加载配置
