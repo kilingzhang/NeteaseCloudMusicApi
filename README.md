@@ -1,5 +1,7 @@
 # 网易云音乐 API
 
+[![Latest Unstable Version](https://poser.pugx.org/kilingzhang/netease-cloud-music-api/v/unstable)](https://packagist.org/packages/kilingzhang/netease-cloud-music-api)
+[![License](https://poser.pugx.org/kilingzhang/netease-cloud-music-api/license)](https://packagist.org/packages/kilingzhang/netease-cloud-music-api)
 ## 描述
 
 网易云音乐 API
