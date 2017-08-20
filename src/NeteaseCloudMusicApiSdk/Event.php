@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Kilingzhang  <slight@kilingzhang.com>
  * Date: 2017/8/19
- * Time: 2:50
+ * Time: 19:22
  */
 
 namespace NeteaseCloudMusicApiSdk;
@@ -13,43 +13,38 @@ use PhpBoot\DI\Traits\EnableDIAnnotations;
 use Utils\Request;
 use Utils\Snoopy;
 
-class Login
+class Event
 {
 
     use EnableDIAnnotations;
 
+
+
     /**
-     * 登录
-     * 说明:登录有两个接口
-     *
-     * 1. 手机登录
+     * 获取动态消息
+     * 说明:调用此接口,可获取各种动态,对应网页版网易云，朋友界面里的各种动态消息，如分享的视频，音乐，照片等！
      *
      * 必选参数:
-     * phone: 手机号码
-     * password: 密码
+     * 未知
      *
      * 接口地址:
-     * /login/cellphone
+     * /event
      *
      * 调用例子:
-     * /login/cellphone?phone=xxx&pw=yyy
+     * /event
      *
-     * @route GET /login/cellphone
-     * @param string $phone
-     * @param string $pw
+     * @route GET /event
      * @return string json
      */
-    public function login($phone, $pw)
+    public function event()
     {
         $Request = new Request();
         $data = array(
-            'phone' => $phone,
-            'password' => md5($pw),
-            'rememberLogin' => 'true'
+            'csrf_token' => '',
         );
         $response = $Request->createWebAPIRequest(
             "http://music.163.com",
-            "/weapi/login/cellphone",
+            "/weapi/v1/event/get",
             'POST',
             $data
         );

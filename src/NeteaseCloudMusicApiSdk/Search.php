@@ -50,17 +50,17 @@ class Search
      * /search?keywords=我的一个道姑朋友
      *
      * @route GET /search
-     * @param string $keyword
+     * @param string $keywords
      * @param int $limit
      * @param int $offset
      * @param int $type
      * @return string json
      */
-    public function search($keyword, $limit = 30, $offset = 0, $type = 1)
+    public function search($keywords, $limit = 30, $offset = 0, $type = 1)
     {
         $Request = new Request();
         $data = array(
-            's' => $keyword,
+            's' => $keywords,
             'type' => $type,
             'limit' => $limit,
             'total' => 'true',

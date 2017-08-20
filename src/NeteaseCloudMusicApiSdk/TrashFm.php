@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Kilingzhang  <slight@kilingzhang.com>
  * Date: 2017/8/19
- * Time: 2:50
+ * Time: 19:22
  */
 
 namespace NeteaseCloudMusicApiSdk;
@@ -13,47 +13,46 @@ use PhpBoot\DI\Traits\EnableDIAnnotations;
 use Utils\Request;
 use Utils\Snoopy;
 
-class Login
+class TrashFm
 {
 
     use EnableDIAnnotations;
 
     /**
-     * 登录
-     * 说明:登录有两个接口
      *
-     * 1. 手机登录
+     * 垃圾桶
+     * 说明:调用此接口,传入音乐 id, 可把该音乐从私人 FM中移除至垃圾桶
      *
      * 必选参数:
-     * phone: 手机号码
-     * password: 密码
+     * id: 歌曲 id
      *
      * 接口地址:
-     * /login/cellphone
+     * /fm_trash
      *
      * 调用例子:
-     * /login/cellphone?phone=xxx&pw=yyy
+     * /fm_trash?id=347230
      *
-     * @route GET /login/cellphone
-     * @param string $phone
-     * @param string $pw
+     * @route GET /fm_trash
+     * @param int $id
+     * @param int $alg
+     * @param int $time
      * @return string json
      */
-    public function login($phone, $pw)
+    public function fm_trash($id, $alg = 'RT', $time = 25)
     {
+        $songId = $id;
         $Request = new Request();
         $data = array(
-            'phone' => $phone,
-            'password' => md5($pw),
-            'rememberLogin' => 'true'
+            'songId' => $songId,
+            'csrf_token' => '',
         );
         $response = $Request->createWebAPIRequest(
             "http://music.163.com",
-            "/weapi/login/cellphone",
+            "/weapi/radio/trash/add?alg={$alg}&songId={$songId}&time={$time}",
             'POST',
             $data
         );
-        return json_decode($response, true);
+        return \GuzzleHttp\json_decode($response, true);
     }
 
 

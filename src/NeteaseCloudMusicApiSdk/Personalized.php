@@ -7,10 +7,16 @@
  */
 
 namespace NeteaseCloudMusicApiSdk;
-
+use PhpBoot\Application;
+use PhpBoot\DI\Traits\EnableDIAnnotations;
+use Utils\Request;
+use Utils\Snoopy;
 
 class Personalized
 {
+
+    use EnableDIAnnotations;
+
     /**
      *
      * 推荐歌单

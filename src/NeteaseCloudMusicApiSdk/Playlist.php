@@ -60,4 +60,43 @@ class PlayList
     }
 
 
+    //TODO　未测试
+    /**
+     * 收藏单曲到歌单
+     * 说明:调用此接口,传入音乐 id和 limit 参数, 可获得该专辑的所有评论(需要登录)
+     *
+     * 必选参数:
+     * op: 从歌单增加单曲为add,删除为 del pid: 歌单id tracks: 歌曲id
+     *
+     * 接口地址:
+     * /playlist/tracks
+     *
+     * 调用例子:
+     * /playlist/tracks?op=add&pid=24381616&tracks=347230 (对应把'海阔天空'添加到'我'的歌单,测试的时候请把这里的 pid换成你自己的)
+     * @route GET /playlist/tracks
+     * @param int $pid
+     * @param string $op
+     * @param int $tracks
+     * @return string json
+     *
+     */
+    public function tracks($pid,$tracks,$op = 'add')
+    {
+        $Request = new Request();
+        $data = array(
+            'op' => $op,
+            'pid' => $pid,
+            'tracks' => $tracks,
+            'trackIds' => "[$tracks]",
+            'csrf_token' => '',
+        );
+        $response = $Request->createWebAPIRequest(
+            "http://music.163.com",
+            "/weapi/playlist/manipulate/tracks",
+            'POST',
+            $data
+        );
+        return \GuzzleHttp\json_decode($response, true);
+    }
+
 }

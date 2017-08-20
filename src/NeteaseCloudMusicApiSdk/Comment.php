@@ -241,9 +241,63 @@ class Comment
     }
 
 
-    public function like()
+    /**
+     *
+     * 给评论点赞
+     * 说明:调用此接口,传入 type, 资源 id, 和评论id cid和 是否点赞参数 t 即可给对应评论点赞(需要登录)
+     *
+     * 必选参数:
+     * id : 资源 id, 如歌曲 id,mv id
+     *
+     * cid : 评论 id
+     *
+     * t :是否点赞,1为点赞,0为取消点赞
+     *
+     * tpye: 数字,资源类型,对应歌曲, mv, 专辑,歌单,电台 对应以下类型
+     *
+     * 0: 歌曲
+     * 1: mv
+     * 2: 歌单
+     * 3: 专辑
+     * 4: 电台
+     * 接口地址:
+     * comment/like
+     *
+     * 调用例子:
+     * /comment/like?id=186016&cid=4956438&t=1&type=0 对应给晴天最热门的那条评论点赞
+     *
+     * @route GET /comment/like
+     * @param string $id
+     * @param string $cid
+     * @param string $t
+     * @param string $type
+     * @return string json
+     */
+    public function like($id, $cid, $t = 1, $type)
     {
-
+        $typeMap = array(
+            'R_SO_4_', //歌曲
+            'R_MV_5_', //mv
+            'A_PL_0_', //歌单
+            'R_AL_3_', //专辑
+            'A_DJ_1_' //电台
+        );
+        $type = $typeMap[$type];
+        $Request = new Request();
+        $data = array(
+            'threadId' => $type . $id,
+            'commentId' => $cid,
+            'csrf_token' => '',
+        );
+        $action = $t == 1 ? 'like' : 'unlike';
+        $response = $Request->createWebAPIRequest(
+            "http://music.163.com",
+            "/weapi/v1/comment/{$action}",
+            'POST',
+            $data
+        );
+        return \GuzzleHttp\json_decode($response, true);
     }
+
 
 }

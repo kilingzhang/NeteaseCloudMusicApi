@@ -90,6 +90,9 @@ class Request
         $this->_USERAGENT = self::randomUserAgent();
         $this->snoopy->agent = $this->_USERAGENT;
         $this->snoopy->rawheaders['Cookies'] = $this->_COOKIE;
+        $this->snoopy->cookies['__remember_me'] = true;
+        $this->snoopy->cookies['MUSIC_U'] = isset($_COOKIE['MUSIC_U']) ? $_COOKIE['MUSIC_U'] : null;
+        $this->snoopy->cookies['__csrf'] = isset($_COOKIE['__csrf']) ? $_COOKIE['__csrf'] : null;
         $this->snoopy->referer = $this->_REFERER;
         $this->snoopy->host = 'music.163.com';
         $data = $this->prepare($data);
@@ -105,7 +108,7 @@ class Request
         $url
     )
     {
-       
+
 
     }
 
