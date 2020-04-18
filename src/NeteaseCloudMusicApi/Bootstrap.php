@@ -17,7 +17,7 @@ class Bootstrap
     {
         try {
             $this->useNamespaces(NAMESPACES);
-        } catch (\Exception $e) {
+        } catch (Throwable $e) {
             Response::fail([], $e->getMessage());
         }
     }
