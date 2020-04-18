@@ -1,37 +1,28 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Kilingzhang  <slight@kilingzhang.com>
- * Date: 2017/8/19
+ * User: Kilingzhang
+ * Date: 2020/4/18
  * Time: 14:25
  */
-
-require_once "Autoloader.php";
 require_once "vendor/autoload.php";
-use PhpBoot\Docgen\Swagger\Swagger;
-use PhpBoot\Docgen\Swagger\SwaggerProvider;
-use PhpBoot\Application;
-use PhpBoot\Controller\Hooks\Cors;
-ini_set('date.timezone','Asia/Shanghai');
+ini_set('date.timezone', 'Asia/Chongqing');
 
-// 加载配置
-$app = \PhpBoot\Application::createByDefault(
-    'Config.php'
-);
+!defined('PATH_INFO') && define('PATH_INFO', trim(parse_url($_SERVER['REQUEST_URI'])['path'], '/'));
 
+$namespaces = explode('/', PATH_INFO);
+$namespaces = array_map(function ($namespace) {
+    return ucfirst($namespace);
+}, $namespaces);
 
-//接口文档自动导出功能, 如果要关闭此功能, 只需注释掉这块代码{{
-SwaggerProvider::register($app, function(Swagger $swagger)use($app){
-    $swagger->schemes = ['http'];
-    $swagger->host = $app->get('host');
-    $swagger->info->title = '网易云音乐API';
-    $swagger->info->description = "网易云音乐API";
-});
-//}}
-$app->loadRoutesFromPath( 'src/NeteaseCloudMusicApiSdk', 'NeteaseCloudMusicApiSdk');
+$namespaces = implode("\\", $namespaces);
+$version = "V1";
+$namespaces = sprintf("\\NeteaseCloudMusicApi\\%s\\%s", $version, $namespaces);
+$namespaces = !class_exists($namespaces) ? sprintf("%s\\Index", $namespaces) : $namespaces;
 
-//执行请求
-$app->dispatch();
+!defined('NAMESPACES') && define('NAMESPACES', $namespaces);
+
+new \NeteaseCloudMusicApi\Bootstrap;
 
 
 

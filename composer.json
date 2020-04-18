@@ -1,22 +1,37 @@
 {
   "name": "kilingzhang/netease-cloud-music-api",
   "type": "library",
+  "version": "1.0.0",
   "authors": [
     {
       "name": "kilingzhang",
-      "email": "slight@kilingzhang.com",
-      "homepage": "http://www.kilingzhang.com/",
+      "email": "i@kilingzhang.com",
+      "homepage": "https://blog.kilingzhang.com",
       "role": "Developer"
     }
   ],
   "homepage": "http://github.com/kilingzhang/neteaseCloudMusicApi",
   "require": {
-    "caoym/phpboot": "^2.0.7"
+    "ext-json": "*",
+    "ext-openssl": "*"
+  },
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/"
+    ],
+    "files": [
+      "src/Utils/Functions.php"
+    ]
   },
   "repositories": {
     "packagist": {
       "type": "composer",
-      "url": "https://packagist.phpcomposer.com"
+      "url": "https://mirrors.aliyun.com/composer"
     }
   },
   "description": "网易云音乐 PHP 版 API",
@@ -26,5 +41,8 @@
     "音乐",
     "网易云音乐PHP"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "require-dev": {
+    "phpunit/phpunit": "^8.5"
+  }
 }

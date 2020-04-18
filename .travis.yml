@@ -1,4 +1,18 @@
 language: php
-php:
-  - 5.5
 
+os:
+  - linux
+
+services:
+  - docker
+
+php:
+  - 7.1
+  - 7.2
+  - 7.3
+  - 7.4
+  - nightly
+
+
+notifications:
+  email: i@kilingzhang.com
