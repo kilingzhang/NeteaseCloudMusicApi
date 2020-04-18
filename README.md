@@ -111,7 +111,30 @@
 
         git clone https://github.com/kilingzhang/NeteaseCloudMusicApi.git
 
-3.  composer install
+3. 依赖安装
+
+        composer install
+
+4. nginx
+    
+        server {
+        
+            listen 80;
+            server_name i.music.163.com;
+            root /var/www/html/NeteaseCloudMusicApi;
+            index index.php;
+        
+            location / {
+                try_files $uri $uri/ /index.php?$query_string;
+            }
+        
+            location ~ \.php$ {
+                fastcgi_pass  127.0.0.1:5337;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+            }
+        }
 
 ## 使用文档
 
