@@ -2,22 +2,21 @@
 /**
  * Created by PhpStorm.
  * User: kilingzhang
- * Date: 2020-04-18
- * Time: 15:44
+ * Date: 2020-04-19
+ * Time: 02:51
  */
 
 namespace NeteaseCloudMusicApi\V1\Search;
 
+
 use NeteaseCloudMusicApi\Controller;
 
 /**
- * Class Index
+ * Class Suggest
  * @package NeteaseCloudMusicApi\V1\Search
  *
- * 搜索
- * 说明:调用此接口,传入搜索关键词可以搜索该音乐/专辑/歌手/歌单/用户,关键词可以多个,以空格隔开,
- * 如"我的一个道姑朋友 "(不需要登录),
- * 搜索获取的 mp3url 不能直接用,可通过 /music/url 接口传入歌曲 id 获取具体的播放链接
+ * 搜索建议
+ * 说明:调用此接口,传入搜索关键词可获得搜索建议,搜索结果同时包含单曲,歌手,歌单,mv 信息
  *
  * 必选参数:
  * keywords : 关键词
@@ -37,15 +36,15 @@ use NeteaseCloudMusicApi\Controller;
  * 1009: 电台
  *
  * 接口地址:
- * /search
+ * /search/suggest
  *
  * 调用例子:
- * http://i.music.163.com/search?keywords=%E6%88%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%81%93%E5%A7%91%E6%9C%8B%E5%8F%8B
+ * http://i.music.163.com/search/suggest?keywords=%E6%88%91%E7%9A%84%E4%B8%80%E4%B8%AA%E9%81%93%E5%A7%91%E6%9C%8B%E5%8F%8B
  *
  */
-class Index extends Controller
+class Suggest extends Controller
 {
-    protected $uri = 'http://music.163.com/weapi/search/get';
+    protected $uri = 'https://music.163.com/weapi/search/suggest/web';
 
     protected $params = [
         'keywords' => [
@@ -62,4 +61,9 @@ class Index extends Controller
     protected $options = [
         'crypto' => 'weapi',
     ];
+
+    protected function newResponse(array $response): array
+    {
+        return empty($response['result']) ? [] : $response['result'];
+    }
 }

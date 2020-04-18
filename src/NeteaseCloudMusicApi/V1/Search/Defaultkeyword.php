@@ -15,6 +15,13 @@ use NeteaseCloudMusicApi\Controller;
  * @package NeteaseCloudMusicApi\V1\Search
  *
  * 默认搜索关键词
+ *
+ * 接口地址:
+ * /search/defaultkeyword
+ *
+ * 调用例子:
+ * http://i.music.163.com/search/defaultkeyword
+ *
  */
 class Defaultkeyword extends Controller
 {

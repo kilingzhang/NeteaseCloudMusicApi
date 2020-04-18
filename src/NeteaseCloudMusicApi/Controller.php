@@ -45,22 +45,39 @@ abstract class Controller
         $params = [];
         foreach ($this->params as $key => $param) {
             if (is_array($param)) {
+
+                if (isset($param['route'])) {
+                    $this->uri = str_replace(
+                        sprintf("{\$%s}", $param['route']),
+                        self::get($key, $param['value']),
+                        $this->uri
+                    );
+                    continue;
+                }
+
                 $params[$param['as']] = self::get($key, $param['value']);
             } else {
                 $params[$key] = self::get($key, $param);
             }
         }
 
-        return $this->newRequest(new Request)->createRequest(
-            $this->uri,
-            $params,
-            $this->options
+        return $this->newResponse(
+            $this->newRequest(new Request)->createRequest(
+                $this->uri,
+                $params,
+                $this->options
+            )
         );
     }
 
     protected function newRequest(Request $request): Request
     {
         return $request;
+    }
+
+    protected function newResponse(array $response): array
+    {
+        return $response;
     }
 
     /**
