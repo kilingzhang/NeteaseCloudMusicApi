@@ -20,7 +20,8 @@ class Index extends Controller
             0,
             'it`s work successfully',
             [
-                'doc' => 'https://blog.kilingzhang.com/NeteaseCloudMusicApi'
+                'docs' => 'https://blog.kilingzhang.com/NeteaseCloudMusicApi',
+                'github' => 'https://github.com/kilingzhang/NeteaseCloudMusicApi',
             ]
         );
     }
