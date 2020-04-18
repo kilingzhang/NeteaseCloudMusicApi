@@ -17,7 +17,7 @@ $namespaces = array_map(function ($namespace) {
 
 $namespaces = implode("\\", $namespaces);
 $version = "V1";
-$namespaces = sprintf("\\NeteaseCloudMusicApi\\%s\\%s", $version, $namespaces);
+$namespaces = rtrim(sprintf("\\NeteaseCloudMusicApi\\%s\\%s", $version, $namespaces),'\\');
 $namespaces = !class_exists($namespaces) ? sprintf("%s\\Index", $namespaces) : $namespaces;
 
 !defined('NAMESPACES') && define('NAMESPACES', $namespaces);
