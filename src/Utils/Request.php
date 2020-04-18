@@ -10,7 +10,6 @@ namespace Utils;
 
 class Request
 {
-    // General
     protected $iv = '0102030405060708';
     protected $presetKey = '0CoJUm6Qyw8W8jud';
     protected $linuxapiKey = 'rFgB&h#%2?^eDg:Q';
@@ -183,8 +182,8 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
      */
     protected function encryptWeapi($raw): array
     {
-        $data['params'] = $this->aes_encode(json_encode($raw), $this->presetKey, 'cbc', $this->iv);
-        $data['params'] = $this->aes_encode($data['params'], $this->secretKey, 'cbc', $this->iv);
+        $data['params'] = $this->aes_encode(json_encode($raw), $this->presetKey, 'cbc', $this->iv, false);
+        $data['params'] = $this->aes_encode($data['params'], $this->secretKey, 'cbc', $this->iv, false);
         $data['encSecKey'] = $this->encSecKey;
         return $data;
     }
@@ -228,24 +227,26 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
     /**
      * @param $secretData
      * @param $secret
-     * @param string $mode
+     * @param $mode
      * @param $iv
+     * @param bool $options
      * @return string
      */
-    protected function aes_encode($secretData, $secret, $mode, $iv)
+    protected function aes_encode($secretData, $secret, $mode, $iv, $options = true)
     {
-        return openssl_encrypt($secretData, 'aes-128-' . $mode, $secret, true, $iv);
+        return openssl_encrypt($secretData, 'aes-128-' . $mode, $secret, $options, $iv);
     }
 
     /**
      * @param $secretData
      * @param $secret
-     * @param string $mode
+     * @param $mode
      * @param $iv
+     * @param bool $options
      * @return string
      */
-    protected function aes_decode($secretData, $secret, $mode, $iv)
+    protected function aes_decode($secretData, $secret, $mode, $iv, $options = true)
     {
-        return openssl_decrypt($secretData, 'aes-128-' . $mode, $secret, false, $iv);
+        return openssl_decrypt($secretData, 'aes-128-' . $mode, $secret, $options, $iv);
     }
 }

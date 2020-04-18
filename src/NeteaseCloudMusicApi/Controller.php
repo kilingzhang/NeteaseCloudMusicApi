@@ -9,12 +9,58 @@
 namespace NeteaseCloudMusicApi;
 
 
+use Utils\Request;
+use Utils\Response;
 
 abstract class Controller
 {
+    /**
+     * @var string
+     */
+    protected $uri = '';
+    /**
+     * @var array
+     */
+    protected $params = [];
+    /**
+     * @var array
+     */
+    protected $options = [];
+
+    /**
+     * Controller constructor.
+     * @throws \Exception
+     */
     public function __construct()
     {
-        $this->run();
+        Response::success($this->request());
+    }
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    final protected function request()
+    {
+        $params = [];
+        foreach ($this->params as $key => $param) {
+            if (is_array($param)) {
+                $params[$param['as']] = self::get($key, $param['value']);
+            } else {
+                $params[$key] = self::get($key, $param);
+            }
+        }
+
+        return $this->newRequest(new Request)->createRequest(
+            $this->uri,
+            $params,
+            $this->options
+        );
+    }
+
+    protected function newRequest(Request $request): Request
+    {
+        return $request;
     }
 
     /**
@@ -30,6 +76,4 @@ abstract class Controller
         }
         return !isset($_GET[$key]) ? $value : $_GET[$key];
     }
-
-    abstract public function run();
 }

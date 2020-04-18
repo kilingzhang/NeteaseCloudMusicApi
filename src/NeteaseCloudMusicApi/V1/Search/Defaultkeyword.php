@@ -9,32 +9,21 @@
 namespace NeteaseCloudMusicApi\V1\Search;
 
 use NeteaseCloudMusicApi\Controller;
-use Utils\Request;
-use Utils\Response;
 
+/**
+ * Class Defaultkeyword
+ * @package NeteaseCloudMusicApi\V1\Search
+ *
+ * 默认搜索关键词
+ */
 class Defaultkeyword extends Controller
 {
-    /**
-     * @throws \Exception
-     */
-    public function run()
-    {
-        $response = $this->defaultkeyword();
-        Response::success($response);
-    }
+    protected $uri = 'http://interface3.music.163.com/eapi/search/defaultkeyword/get';
 
-    // 默认搜索关键词
-    public function defaultkeyword(): array
-    {
-        $data = array();
+    protected $params = [];
 
-        return (new Request)->createRequest(
-            "http://interface3.music.163.com/eapi/search/defaultkeyword/get",
-            $data,
-            [
-                'crypto' => 'eapi',
-                'url' => '/api/search/defaultkeyword/get'
-            ]
-        );
-    }
+    protected $options = [
+        'crypto' => 'eapi',
+        'url' => '/api/search/defaultkeyword/get'
+    ];
 }
