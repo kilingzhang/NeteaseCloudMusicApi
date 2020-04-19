@@ -54,6 +54,7 @@ abstract class Controller
      */
     final protected function request()
     {
+        // 参数处理
         $params = [];
         foreach ($this->params as $key => $param) {
             if (is_array($param)) {
@@ -67,7 +68,11 @@ abstract class Controller
                     continue;
                 }
 
-                $params[$param['as']] = self::get($key, $param['value'], $param['enum']);
+                $value = self::get($key, $param['value'], $param['enum']);
+                isset($param['encrypt']) && $value = $this->encrypt($param['encrypt'], $value);
+                isset($param['as']) && $params[$param['as']] = $value;
+                !isset($param['as']) && $params[$key] = $value;
+
             } else {
                 $params[$key] = self::get($key, $param);
             }
@@ -122,5 +127,19 @@ abstract class Controller
         }
         $value = !isset($_POST[$key]) ? $value : $_POST[$key];
         return !empty($enum) && isset($enum[$value]) ? $enum[$value] : $value;
+    }
+
+    /**
+     * @param $encrypt
+     * @param $value
+     * @return string
+     */
+    private function encrypt($encrypt, $value)
+    {
+        switch ($encrypt) {
+            default:
+            case "md5":
+                return md5($value);
+        }
     }
 }
