@@ -146,7 +146,7 @@
 ## 使用文档
 
 [在线文档](https://kilingzhang.github.io/NeteaseCloudMusicApi/)
-<a href="https://kilingzhang.github.io/NeteaseCloudMusicApi/">![docs](https://private-figure-bed.oss-cn-beijing.aliyuncs.com/UTOOLS1584170187341.png)</a>
+<a href="https://kilingzhang.github.io/NeteaseCloudMusicApi/">![docs](https://private-figure-bed.oss-cn-beijing.aliyuncs.com/UTOOLS1587319416337.png)</a>
 
     
 
