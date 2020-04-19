@@ -25,7 +25,7 @@ use NeteaseCloudMusicApi\Controller;
  * /playlist/detail
  *
  * 调用例子:
- * http://i.music.163.com/playlist/detail?id=24381616
+ * http://i.music.163.com/playlist/detail?id=313997889
  *
  */
 class Detail extends Controller
