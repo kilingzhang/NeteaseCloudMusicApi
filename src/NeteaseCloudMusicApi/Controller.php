@@ -15,6 +15,10 @@ use Utils\Response;
 abstract class Controller
 {
     /**
+     * @var bool
+     */
+    protected $debug = true;
+    /**
      * @var string
      */
     protected $uri = '';
@@ -57,13 +61,13 @@ abstract class Controller
                 if (isset($param['route'])) {
                     $this->uri = str_replace(
                         sprintf("{\$%s}", $param['route']),
-                        self::get($key, $param['value']),
+                        self::get($key, $param['value'], $param['enum']),
                         $this->uri
                     );
                     continue;
                 }
 
-                $params[$param['as']] = self::get($key, $param['value']);
+                $params[$param['as']] = self::get($key, $param['value'], $param['enum']);
             } else {
                 $params[$key] = self::get($key, $param);
             }
@@ -91,14 +95,32 @@ abstract class Controller
     /**
      * @param string $key
      * @param null $value
+     * @param array|null $enum
      * @return null
      * @throws \Exception
      */
-    protected function get(string $key, $value = null)
+    protected function get(string $key, $value = null, array $enum = null)
     {
         if (!isset($_GET[$key]) && $value === null) {
             throw new \Exception(sprintf("{%s}参数不存在", $key));
         }
-        return !isset($_GET[$key]) ? $value : $_GET[$key];
+        $value = !isset($_GET[$key]) ? $value : $_GET[$key];
+        return !empty($enum) && isset($enum[$value]) ? $enum[$value] : $value;
+    }
+
+    /**
+     * @param string $key
+     * @param null $value
+     * @param array|null $enum
+     * @return null
+     * @throws \Exception
+     */
+    protected function post(string $key, $value = null, array $enum = null)
+    {
+        if (!isset($_POST[$key]) && $value === null) {
+            throw new \Exception(sprintf("{%s}参数不存在", $key));
+        }
+        $value = !isset($_POST[$key]) ? $value : $_POST[$key];
+        return !empty($enum) && isset($enum[$value]) ? $enum[$value] : $value;
     }
 }

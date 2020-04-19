@@ -25,7 +25,7 @@ use NeteaseCloudMusicApi\Controller;
  */
 class Defaultkeyword extends Controller
 {
-    protected $uri = 'http://interface3.music.163.com/eapi/search/defaultkeyword/get';
+    protected $uri = 'https://interface3.music.163.com/eapi/search/defaultkeyword/get';
 
     protected $params = [];
 

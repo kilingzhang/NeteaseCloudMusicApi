@@ -29,7 +29,7 @@ use NeteaseCloudMusicApi\Controller;
  */
 class Multimatch extends Controller
 {
-    protected $uri = 'http://music.163.com/weapi/search/suggest/multimatch';
+    protected $uri = 'https://music.163.com/weapi/search/suggest/multimatch';
 
     protected $params = [
         'keywords' => [

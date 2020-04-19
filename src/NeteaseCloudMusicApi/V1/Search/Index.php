@@ -45,7 +45,7 @@ use NeteaseCloudMusicApi\Controller;
  */
 class Index extends Controller
 {
-    protected $uri = 'http://music.163.com/weapi/search/get';
+    protected $uri = 'https://music.163.com/weapi/search/get';
 
     protected $params = [
         'keywords' => [

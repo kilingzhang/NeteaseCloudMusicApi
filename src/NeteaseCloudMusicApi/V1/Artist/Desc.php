@@ -30,7 +30,7 @@ use NeteaseCloudMusicApi\Controller;
  */
 class Desc extends Controller
 {
-    protected $uri = 'http://music.163.com/weapi/artist/introduction';
+    protected $uri = 'https://music.163.com/weapi/artist/introduction';
 
     protected $params = [
         'id' => null,
