@@ -27,8 +27,6 @@ class Defaultkeyword extends Controller
 {
     protected $uri = 'https://interface3.music.163.com/eapi/search/defaultkeyword/get';
 
-    protected $params = [];
-
     protected $options = [
         'crypto' => 'eapi',
         'url' => '/api/search/defaultkeyword/get'

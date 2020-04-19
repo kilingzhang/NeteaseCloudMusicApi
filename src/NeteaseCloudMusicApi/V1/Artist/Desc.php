@@ -36,8 +36,4 @@ class Desc extends Controller
         'id' => null,
         'csrf_token' => '',
     ];
-
-    protected $options = [
-        'crypto' => 'weapi',
-    ];
 }

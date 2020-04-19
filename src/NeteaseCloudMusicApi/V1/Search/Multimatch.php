@@ -40,10 +40,6 @@ class Multimatch extends Controller
         'csrf_token' => '',
     ];
 
-    protected $options = [
-        'crypto' => 'weapi',
-    ];
-
     protected function newResponse(array $response): array
     {
         return empty($response['result']) ? [] : $response['result'];

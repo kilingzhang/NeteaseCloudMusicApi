@@ -47,8 +47,4 @@ class Index extends Controller
         ],
         'csrf_token' => '',
     ];
-
-    protected $options = [
-        'crypto' => 'weapi',
-    ];
 }

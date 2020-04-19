@@ -46,8 +46,4 @@ class Mv extends Controller
         'limit' => 50,
         'csrf_token' => '',
     ];
-
-    protected $options = [
-        'crypto' => 'weapi',
-    ];
 }

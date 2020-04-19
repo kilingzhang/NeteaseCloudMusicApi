@@ -58,10 +58,6 @@ class Suggest extends Controller
         'total' => 'true',
     ];
 
-    protected $options = [
-        'crypto' => 'weapi',
-    ];
-
     protected function newResponse(array $response): array
     {
         return empty($response['result']) ? [] : $response['result'];
