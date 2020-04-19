@@ -34,6 +34,5 @@ class Desc extends Controller
 
     protected $params = [
         'id' => null,
-        'csrf_token' => '',
     ];
 }

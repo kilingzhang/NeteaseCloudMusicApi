@@ -44,6 +44,5 @@ class Mv extends Controller
         'total' => true,
         'offset' => 0,
         'limit' => 50,
-        'csrf_token' => '',
     ];
 }

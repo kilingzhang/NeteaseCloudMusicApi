@@ -37,7 +37,6 @@ class Multimatch extends Controller
             'as' => 's'
         ],
         'type' => 1,
-        'csrf_token' => '',
     ];
 
     protected function newResponse(array $response): array

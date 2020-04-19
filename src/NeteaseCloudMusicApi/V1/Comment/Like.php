@@ -49,7 +49,6 @@ class Like extends Controller
             'as' => 'commentId',
         ],
         'threadId' => '',
-        'csrf_token' => '',
     ];
 
     protected function newRequest(Request $request): Request

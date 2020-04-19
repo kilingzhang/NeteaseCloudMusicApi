@@ -55,7 +55,6 @@ class Index extends Controller
         'limit' => 30,
         'offset' => 0,
         'type' => 1,
-        'csrf_token' => '',
         'total' => 'true',
     ];
 }

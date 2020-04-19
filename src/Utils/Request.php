@@ -98,6 +98,7 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
         switch ($options['crypto']) {
             default:
             case "weapi":
+                $data['csrf_token'] = $this->snoopy->cookies['__csrf'];
                 $data = $this->encryptWeapi($data);
                 break;
             case "eapi":

@@ -42,7 +42,6 @@ class Cellphone extends Controller
         ],
         'countrycode' => 86,
         'rememberLogin' => true,
-        'csrf_token' => ''
     ];
 
     protected $options = [

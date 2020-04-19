@@ -37,6 +37,5 @@ class Index extends Controller
             'value' => null,
             'route' => 'id',
         ],
-        'csrf_token' => '',
     ];
 }

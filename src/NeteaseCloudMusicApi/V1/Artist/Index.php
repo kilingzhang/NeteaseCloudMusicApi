@@ -45,6 +45,5 @@ class Index extends Controller
             'value' => 50,
             'route' => 'limit',
         ],
-        'csrf_token' => '',
     ];
 }
