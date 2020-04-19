@@ -76,6 +76,7 @@ abstract class Controller
             }
         }
 
+        $this->beforeRequest();
         return $this->newResponse(
             $this->newRequest(new Request)->createRequest(
                 $this->uri,
@@ -134,5 +135,13 @@ abstract class Controller
     protected function parseParams($params): array
     {
         return $params;
+    }
+
+    /**
+     *
+     */
+    protected function beforeRequest()
+    {
+
     }
 }
