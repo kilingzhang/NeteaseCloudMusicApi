@@ -36,14 +36,16 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
 
     public function setCookie($key, $value)
     {
-        $this->snoopy->cookies[$key] = $value;
+        setcookie($key, $value, time() + 60 * 60 * 24, '/');
+        $this->snoopy->cookies[$key] = $_COOKIE[$key];
         return $this;
     }
 
     public function setCookies($cookies = [])
     {
         foreach ($cookies as $key => $cookie) {
-            $this->snoopy->cookies[$key] = $cookie;
+            setcookie($key, $cookie, time() + 60 * 60 * 24, '/');
+            $this->snoopy->cookies[$key] = $_COOKIE[$key];
         }
         return $this;
     }
@@ -51,6 +53,7 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
     public function setHeader($key, $value)
     {
         $this->snoopy->headers[$key] = $value;
+        return $this;
     }
 
     public function setHeaders($headers = [])
@@ -87,11 +90,11 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
         $this->snoopy->agent = $this->userAgent;
         $this->snoopy->rawheaders['Cookies'] = $this->cookies;
         $this->snoopy->cookies['__remember_me'] = true;
+        $this->snoopy->cookies['_ga'] = isset($_COOKIE['_ga']) ? $_COOKIE['_ga'] : null;
         $this->snoopy->cookies['MUSIC_U'] = isset($_COOKIE['MUSIC_U']) ? $_COOKIE['MUSIC_U'] : null;
         $this->snoopy->cookies['__csrf'] = isset($_COOKIE['__csrf']) ? $_COOKIE['__csrf'] : null;
         $this->snoopy->referer = $this->referer;
         $this->snoopy->host = 'music.163.com';
-
         switch ($options['crypto']) {
             default:
             case "weapi":
@@ -99,16 +102,16 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
                 break;
             case "eapi":
                 $headers = [
-//                    'osver' => '', //系统版本
-//                    'deviceId' => '', //encrypt.base64.encode(imei + '\t02:00:00:00:00:00\t5106025eb79a5247\t70ffbaac7')
+                    //'osver' => '', //系统版本
+                    //'deviceId' => '', //encrypt.base64.encode(imei + '\t02:00:00:00:00:00\t5106025eb79a5247\t70ffbaac7')
+                    //'channel' => '',
+                    //'mobilename' => '', //设备model
                     'appver' => '6.1.1', // app版本
                     'versioncode' => '140', //版本号
-//                    'mobilename' => '', //设备model
                     'buildver' => substr(time(), 0, 10),
                     'resolution' => '1920x1080', //设备分辨率
-//                    '__csrf' => '',
+                    '__csrf' => empty($_COOKIE['__csrf']) ? '' : $_COOKIE['__csrf'],
                     'os' => 'android',
-//                    'channel' => '',
                     'requestId' => sprintf("%d_%04d", time(), rand(0, 1000))
                 ];
                 $data['header'] = $headers;
@@ -124,13 +127,12 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
                 ]);
                 break;
         }
-
         $this->snoopy->submit($uri, $data);
         preg_match('/(\d{2,})/', $this->snoopy->response_code, $code);
         $responseCode = $code[0];
         $responseCode != 200 && Response::json($responseCode, $this->snoopy->results, []);
         $response = empty($this->snoopy->results) ? [] : json_decode($this->snoopy->results, true);
-
+        $this->saveCookies();
         switch ($options['crypto']) {
             default:
             case "weapi":
@@ -248,5 +250,14 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
     protected function aes_decode($secretData, $secret, $mode, $iv, $options = true)
     {
         return openssl_decrypt($secretData, 'aes-128-' . $mode, $secret, $options, $iv);
+    }
+
+    protected function saveCookies()
+    {
+        for ($x = 0; $x < count($this->snoopy->headers); $x++) {
+            if (preg_match('/^set-cookie:[\s]+([^=]+)=([^;]+)/i', $this->snoopy->headers[$x], $match)) {
+                $this->setCookie($match[1], urldecode($match[2]));
+            }
+        }
     }
 }

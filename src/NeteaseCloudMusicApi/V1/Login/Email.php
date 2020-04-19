@@ -37,7 +37,6 @@ class Email extends Controller
         ],
         'password' => [
             'value' => null,
-            'encrypt' => 'md5'
         ],
         'rememberLogin' => true,
     ];
@@ -49,5 +48,11 @@ class Email extends Controller
     protected function newRequest(Request $request): Request
     {
         return $request->setCookie('os', 'pc');
+    }
+
+    protected function parseParams($params): array
+    {
+        $params['password'] = md5($params['password']);
+        return $params;
     }
 }

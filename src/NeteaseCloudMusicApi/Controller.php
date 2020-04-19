@@ -59,19 +59,17 @@ abstract class Controller
         foreach ($this->params as $key => $param) {
             if (is_array($param)) {
 
+                $value = self::get($key, $param['value'], $param['enum']);
+                isset($param['as']) && $params[$param['as']] = $value;
+                !isset($param['as']) && $params[$key] = $value;
+
                 if (isset($param['route'])) {
                     $this->uri = str_replace(
                         sprintf("{\$%s}", $param['route']),
-                        self::get($key, $param['value'], $param['enum']),
+                        $value,
                         $this->uri
                     );
-                    continue;
                 }
-
-                $value = self::get($key, $param['value'], $param['enum']);
-                isset($param['encrypt']) && $value = $this->encrypt($param['encrypt'], $value);
-                isset($param['as']) && $params[$param['as']] = $value;
-                !isset($param['as']) && $params[$key] = $value;
 
             } else {
                 $params[$key] = self::get($key, $param);
@@ -81,7 +79,7 @@ abstract class Controller
         return $this->newResponse(
             $this->newRequest(new Request)->createRequest(
                 $this->uri,
-                $params,
+                $this->parseParams($params),
                 $this->options
             )
         );
@@ -130,16 +128,11 @@ abstract class Controller
     }
 
     /**
-     * @param $encrypt
-     * @param $value
-     * @return string
+     * @param $params
+     * @return array
      */
-    private function encrypt($encrypt, $value)
+    protected function parseParams($params): array
     {
-        switch ($encrypt) {
-            default:
-            case "md5":
-                return md5($value);
-        }
+        return $params;
     }
 }

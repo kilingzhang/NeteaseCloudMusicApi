@@ -39,7 +39,6 @@ class Cellphone extends Controller
         'phone' => null,
         'password' => [
             'value' => null,
-            'encrypt' => 'md5'
         ],
         'countrycode' => 86,
         'rememberLogin' => true,
@@ -49,4 +48,10 @@ class Cellphone extends Controller
     protected $options = [
         'ua' => 'pc'
     ];
+
+    protected function parseParams($params): array
+    {
+        $params['password'] = md5($params['password']);
+        return $params;
+    }
 }
