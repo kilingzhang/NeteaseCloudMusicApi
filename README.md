@@ -84,12 +84,12 @@
 
 ## 说明
 
->本接口依照RESTful规范设计（并不完全 - -|| 
+>本接口依照RESTful规范设计（有取舍 - -|| 
 
 ## 环境要求
 
 
-## 镜像安装
+## 镜像安装 (强烈推荐)
     
     vi /etc/hosts
     
@@ -146,13 +146,9 @@
 ## 使用文档
 
 [在线文档](https://kilingzhang.github.io/NeteaseCloudMusicApi/)
-<a href="https://kilingzhang.github.io/NeteaseCloudMusicApi/">![docs](http://markdown-1252847423.file.myqcloud.com/docs.png)</a>
+<a href="https://kilingzhang.github.io/NeteaseCloudMusicApi/">![docs](https://private-figure-bed.oss-cn-beijing.aliyuncs.com/UTOOLS1584170187341.png)</a>
 
     
-
-## Swagger文档输出
-
-
 
 ## License
 [The MIT License (MIT)](https://github.com/kilingzhang/NeteaseCloudMusicApi/blob/master/LICENSE)
