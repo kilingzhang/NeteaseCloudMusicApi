@@ -90,6 +90,10 @@
 
 ## 镜像安装
     
+    vi /etc/hosts
+    
+    127.0.0.1  i.music.163.com
+    
     docker build  -t  kilingzhang/netease-cloud-music-api:dev .
     
     docker stop php_container
@@ -99,7 +103,9 @@
     -p 80:80 \
     kilingzhang/netease-cloud-music-api:dev
     
-    docker exec -it php_container sh
+    curl http://i.music.163.com
+    
+    {"code":0,"message":"it`s work successfully","data":{"docs":"https:\/\/blog.kilingzhang.com\/NeteaseCloudMusicApi","github":"https:\/\/github.com\/kilingzhang\/NeteaseCloudMusicApi"}}
     
 ## 源码安装
 
