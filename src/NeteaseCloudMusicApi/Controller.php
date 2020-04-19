@@ -33,6 +33,14 @@ abstract class Controller
      */
     public function __construct()
     {
+        $this->run();
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function run()
+    {
         Response::success($this->request());
     }
 

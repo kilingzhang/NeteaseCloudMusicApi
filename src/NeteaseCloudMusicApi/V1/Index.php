@@ -14,7 +14,7 @@ use Utils\Response;
 
 class Index extends Controller
 {
-    public function __construct()
+    public function run()
     {
         Response::json(
             0,
