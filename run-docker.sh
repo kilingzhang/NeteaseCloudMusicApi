@@ -9,4 +9,9 @@ docker run -itd  --name=php_container \
 -p 80:80 \
 kilingzhang/netease-cloud-music-api:dev
 
+#docker run -itd  --name=php_container \
+#-p 80:80 \
+#-v  /Users/kilingzhang/Code/NeteaseCloudMusicApi-php:/var/www/html/NeteaseCloudMusicApi \
+#kilingzhang/netease-cloud-music-api:dev
+
 docker exec -it php_container sh
