@@ -97,11 +97,12 @@
     
     docker build  -t  kilingzhang/netease-cloud-music-api:dev .
     
-    docker stop php_container
-    docker rm php_container
-    
-    docker run -itd  --name=php_container \
+    docker stop netease_cloud_music_api_container;
+    docker rm netease_cloud_music_api_container;
+
+    docker run -itd  --name=netease_cloud_music_api_container \
     -p 80:80 \
+    -v  $(pwd):/var/www/html/NeteaseCloudMusicApi \
     kilingzhang/netease-cloud-music-api:dev
     
     curl http://i.music.163.com
