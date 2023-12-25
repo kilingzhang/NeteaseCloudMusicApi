@@ -175,12 +175,13 @@ class Snoopy
                         $frameurls = $this->_frameurls;
                         $this->_frameurls = array();
 
-                        while (list(, $frameurl) = each($frameurls)) {
+                        foreach ($frameurls as $frameurl) {
                             if ($this->_framedepth < $this->maxframes) {
                                 $this->fetch($frameurl);
                                 $this->_framedepth++;
-                            } else
+                            } else {
                                 break;
+                            }
                         }
                     }
                 } else {
@@ -271,12 +272,13 @@ class Snoopy
                         $frameurls = $this->_frameurls;
                         $this->_frameurls = array();
 
-                        while (list(, $frameurl) = each($frameurls)) {
+                        foreach ($frameurls as $frameurl) {
                             if ($this->_framedepth < $this->maxframes) {
                                 $this->fetch($frameurl);
                                 $this->_framedepth++;
-                            } else
+                            } else {
                                 break;
+                            }
                         }
                     }
 
@@ -469,12 +471,12 @@ class Snoopy
 
         // catenate the non-empty matches from the conditional subpattern
 
-        while (list($key, $val) = each($links[2])) {
+        foreach ($links[2] as $key => $val) {
             if (!empty($val))
                 $match[] = $val;
         }
 
-        while (list($key, $val) = each($links[3])) {
+        foreach ($links[3] as $key => $val) {
             if (!empty($val))
                 $match[] = $val;
         }
@@ -668,8 +670,9 @@ class Snoopy
         if (!empty($this->rawheaders)) {
             if (!is_array($this->rawheaders))
                 $this->rawheaders = (array)$this->rawheaders;
-            while (list($headerKey, $headerVal) = each($this->rawheaders))
+            foreach ($this->rawheaders as $headerKey => $headerVal) {
                 $headers .= $headerKey . ": " . $headerVal . "\r\n";
+            }
         }
         if (!empty($content_type)) {
             $headers .= "Content-type: $content_type";
@@ -937,13 +940,14 @@ class Snoopy
         switch ($this->_submit_type) {
             case "application/x-www-form-urlencoded":
                 reset($formvars);
-                while (list($key, $val) = each($formvars)) {
+                foreach ($formvars as $key => $val) {
                     if (is_array($val) || is_object($val)) {
-                        while (list($cur_key, $cur_val) = each($val)) {
+                        foreach ($val as $cur_key => $cur_val) {
                             $postdata .= urlencode($key) . "[]=" . urlencode($cur_val) . "&";
                         }
-                    } else
+                    } else {
                         $postdata .= urlencode($key) . "=" . urlencode($val) . "&";
+                    }
                 }
                 break;
 
@@ -951,9 +955,9 @@ class Snoopy
                 $this->_mime_boundary = "Snoopy" . md5(uniqid(microtime()));
 
                 reset($formvars);
-                while (list($key, $val) = each($formvars)) {
+                foreach ($formvars as $key => $val) {
                     if (is_array($val) || is_object($val)) {
-                        while (list($cur_key, $cur_val) = each($val)) {
+                        foreach ($val as $cur_key => $cur_val) {
                             $postdata .= "--" . $this->_mime_boundary . "\r\n";
                             $postdata .= "Content-Disposition: form-data; name=\"$key\[\]\"\r\n\r\n";
                             $postdata .= "$cur_val\r\n";
@@ -966,9 +970,9 @@ class Snoopy
                 }
 
                 reset($formfiles);
-                while (list($field_name, $file_names) = each($formfiles)) {
+                foreach ($formfiles as $field_name => $file_names) {
                     settype($file_names, "array");
-                    while (list(, $file_name) = each($file_names)) {
+                    foreach ($file_names as $file_name) {
                         if (!is_readable($file_name)) continue;
 
                         $fp = fopen($file_name, "r");
@@ -1010,7 +1014,6 @@ class Snoopy
         $this->proxy_port = 80;
         $this->rawheaders['X-FORWARDED-FOR'] = '210.29.26.250';
         $this->rawheaders['X-Real-IP'] = '210.29.26.250';
-
 
 
     }

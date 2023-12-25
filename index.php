@@ -5,6 +5,8 @@
  * Date: 2020/4/18
  * Time: 14:25
  */
+// 关闭所有报错
+error_reporting(0);
 require_once "vendor/autoload.php";
 ini_set('date.timezone', 'Asia/Chongqing');
 !defined('PATH_INFO') && define('PATH_INFO', trim(parse_url($_SERVER['REQUEST_URI'])['path'], '/'));
@@ -16,7 +18,7 @@ $namespaces = array_map(function ($namespace) {
 
 $namespaces = implode("\\", $namespaces);
 $version = "V1";
-$namespaces = rtrim(sprintf("\\NeteaseCloudMusicApi\\%s\\%s", $version, $namespaces),'\\');
+$namespaces = rtrim(sprintf("\\NeteaseCloudMusicApi\\%s\\%s", $version, $namespaces), '\\');
 $namespaces = !class_exists($namespaces) ? sprintf("%s\\Index", $namespaces) : $namespaces;
 
 !defined('NAMESPACES') && define('NAMESPACES', $namespaces);

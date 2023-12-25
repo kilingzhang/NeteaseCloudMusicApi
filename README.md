@@ -22,6 +22,10 @@
 - 2020-04-20 更新全部已有接口 修复失效接口 (距离上次更新竟然已经三年了 - -)
 - 2017-08-21 nodejs版接口基本完成php的转换
 
+## vercel 部署 (强烈推荐)
+
+<a href="https://vercel.com/new/project?template=https://github.com/kilingzhang/NeteaseCloudMusicApi/tree/master"><img src="https://vercel.com/button"></a>
+
 ## 功能
 1.  登录 
 2.  刷新登录 
@@ -92,7 +96,7 @@
 ## 环境要求
 
 
-## 镜像安装 (强烈推荐)
+## 镜像安装
     
     vi /etc/hosts
     
