@@ -82,13 +82,17 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
         $options = [
             'ua' => '',
             'crypto' => 'weapi'
-        ]
+        ],
+        $cookies = [],
     ): array
     {
         $ua = empty($options['ua']) ? '' : $options['ua'];
         $this->userAgent = self::randomUserAgent($ua);
         $this->snoopy->agent = $this->userAgent;
         $this->snoopy->rawheaders['Cookies'] = $this->cookies;
+        foreach ($cookies as $key => $cookie) {
+            $this->snoopy->cookies[$key] = $cookie;
+        }
         $this->snoopy->cookies['__remember_me'] = true;
         $this->snoopy->cookies['_ga'] = isset($_COOKIE['_ga']) ? $_COOKIE['_ga'] : null;
         $this->snoopy->cookies['MUSIC_U'] = isset($_COOKIE['MUSIC_U']) ? $_COOKIE['MUSIC_U'] : null;

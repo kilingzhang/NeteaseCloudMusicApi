@@ -31,6 +31,8 @@ abstract class Controller
      */
     protected $options = [];
 
+    protected $cookies = [];
+
     /**
      * Controller constructor.
      * @throws \Exception
@@ -81,7 +83,8 @@ abstract class Controller
             $this->newRequest(new Request)->createRequest(
                 $this->uri,
                 $this->parseParams($params),
-                $this->options
+                $this->options,
+                $this->cookies,
             )
         );
     }

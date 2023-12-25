@@ -23,12 +23,13 @@ use NeteaseCloudMusicApi\Controller;
  * 必选参数:
  * phone: 手机号码
  * password: 密码
+ * captcha: 验证码 /captcha/sent
  *
  * 接口地址:
  * /login/cellphone
  *
  * 调用例子:
- * http://i.music.163.com/login/cellphone?phone=17612345678&password=password
+ * http://i.music.163.com/login/cellphone?phone=17612345678&password=password&captcha=captcha
  *
  */
 class Cellphone extends Controller
@@ -37,6 +38,9 @@ class Cellphone extends Controller
 
     protected $params = [
         'phone' => null,
+        'captcha' => [
+            'value' => null,
+        ],
         'password' => [
             'value' => null,
         ],
@@ -46,6 +50,11 @@ class Cellphone extends Controller
 
     protected $options = [
         'ua' => 'pc'
+    ];
+
+    protected $cookies = [
+        'os' => 'ios',
+        'appver' => '8.20.21',
     ];
 
     protected function parseParams($params): array
