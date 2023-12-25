@@ -83,7 +83,7 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
             'ua' => '',
             'crypto' => 'weapi'
         ],
-        $cookies = [],
+        $cookies = []
     ): array
     {
         $ua = empty($options['ua']) ? '' : $options['ua'];
@@ -99,14 +99,23 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
         $this->snoopy->cookies['__csrf'] = isset($_COOKIE['__csrf']) ? $_COOKIE['__csrf'] : null;
         $this->snoopy->referer = $this->referer;
         $this->snoopy->host = 'music.163.com';
+
+        $headers = [];
+        if (!empty($_GET['real_ip'])) {
+            $headers['X-Real-IP'] = $_GET['real_ip'];
+            $headers['X-Forwarded-For'] = $_GET['real_ip'];
+        }
+
         switch ($options['crypto']) {
             default:
             case "weapi":
                 $data['csrf_token'] = $this->snoopy->cookies['__csrf'];
                 $data = $this->encryptWeapi($data);
+                $uri = preg_replace('/\w*api/', 'weapi', $uri);
+                $this->setHeaders($headers);
                 break;
             case "eapi":
-                $headers = [
+                $data['header'] = [
                     //'osver' => '', //系统版本
                     //'deviceId' => '', //encrypt.base64.encode(imei + '\t02:00:00:00:00:00\t5106025eb79a5247\t70ffbaac7')
                     //'channel' => '',
@@ -119,8 +128,8 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
                     'os' => 'android',
                     'requestId' => sprintf("%d_%04d", time(), rand(0, 1000))
                 ];
-                $data['header'] = $headers;
-                $this->setHeaders($headers);
+                $data['header'] = array_merge($data['header'], $headers);
+                $this->setHeaders($data['header']);
                 $data = $this->encryptEApi($options['url'], $data);
                 break;
             case "linuxapi":
@@ -130,6 +139,7 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
                     'url' => $options['url'],
                     'params' => $data
                 ]);
+                $this->setHeaders($headers);
                 break;
         }
         $this->snoopy->submit($uri, $data);
@@ -143,10 +153,8 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDgtQn2JZ34ZC28NWYpAUd98iZ37BUrX/aKzmFbt7cl
             case "weapi":
             case "linuxapi":
                 return $response;
-                break;
             case "eapi":
                 return empty($response['data']) ? [] : $response['data'];
-                break;
         }
     }
 

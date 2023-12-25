@@ -10,6 +10,7 @@ namespace NeteaseCloudMusicApi\V1\Login;
 
 
 use NeteaseCloudMusicApi\Controller;
+use Utils\Request;
 
 /**
  * Class Cellphone
@@ -38,12 +39,8 @@ class Cellphone extends Controller
 
     protected $params = [
         'phone' => null,
-        'captcha' => [
-            'value' => null,
-        ],
-        'password' => [
-            'value' => null,
-        ],
+        'captcha' => null,
+        'password' => '',
         'countrycode' => 86,
         'rememberLogin' => true,
     ];
@@ -52,10 +49,11 @@ class Cellphone extends Controller
         'ua' => 'pc'
     ];
 
-    protected $cookies = [
-        'os' => 'ios',
-        'appver' => '8.20.21',
-    ];
+
+    protected function newRequest(Request $request): Request
+    {
+        return $request->setCookie('os', 'ios')->setCookie('appver', '8.20.21');
+    }
 
     protected function parseParams($params): array
     {

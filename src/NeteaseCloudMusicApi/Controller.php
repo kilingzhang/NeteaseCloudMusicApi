@@ -80,7 +80,7 @@ abstract class Controller
 
         $this->beforeRequest();
         return $this->newResponse(
-            $this->newRequest(new Request)->createRequest(
+            $this->newRequest(new Request())->createRequest(
                 $this->uri,
                 $this->parseParams($params),
                 $this->options,
