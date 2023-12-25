@@ -1,0 +1,13 @@
+{
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.php?$1"
+    }
+  ],
+  "functions": {
+    "index.php": {
+      "runtime": "vercel-php@0.3.3"
+    }
+  }
+}

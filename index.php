@@ -7,7 +7,6 @@
  */
 require_once "vendor/autoload.php";
 ini_set('date.timezone', 'Asia/Chongqing');
-
 !defined('PATH_INFO') && define('PATH_INFO', trim(parse_url($_SERVER['REQUEST_URI'])['path'], '/'));
 
 $namespaces = explode('/', PATH_INFO);
