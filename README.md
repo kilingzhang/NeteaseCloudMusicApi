@@ -1,12 +1,19 @@
 # 网易云音乐 API
 
+## 免责声明
+本项目仅限学习使用，本身目的仅为学习PHP等相关技术，不保证任何行为，不保证包括但不限于任何更新、维护，等行为。因为喜欢网易云音乐才选取本项目学习。所有版权均为网易所有，如有任何侵权行为，本项目将立刻删库。
+
+强烈建议用户在使用本项目之前，对相关法律法规进行充分了解，并确保遵守所有适用的法律要求。在任何情况下，本项目的开发者和贡献者都不对用户的行为或使用本项目所产生的后果承担任何责任。
+
+最后，再次强调，支持正版软件和合法使用是非常重要的。请用户在任何情况下遵守知识产权法和相关法律法规，不要进行任何侵权行为。
+
+
 [![Latest Stable Version](https://poser.pugx.org/kilingzhang/netease-cloud-music-api/v/stable)](https://packagist.org/packages/kilingzhang/netease-cloud-music-api) [![Latest Unstable Version](https://poser.pugx.org/kilingzhang/netease-cloud-music-api/v/unstable)](https://packagist.org/packages/kilingzhang/netease-cloud-music-api) [![License](https://poser.pugx.org/kilingzhang/netease-cloud-music-api/license)](https://packagist.org/packages/kilingzhang/netease-cloud-music-api)
 ## 描述
 
 网易云音乐 API
 网易云音乐 PHP 版 API
 跨站请求伪造 (CSRF), 伪造请求头,调用网易云音乐官方 API
->注：本接口仅限学习使用，请不要用于非法用途。请支持正版。~~网易大法好~~
 
 ## 灵感来自
 曾经用过[@metowolf](https://github.com/metowolf/NeteaseCloudMusicApi)大大的网易接口，也是我搞网易云音乐接口的启蒙。本来想用此接口仿写个网易云音乐app。但是接口不全最后写到一半放弃了。直到遇到[@Binaryify](https://binaryify.github.io/NeteaseCloudMusicApi/)大大的nodejs版60+的API。感觉发现了新大陆/\*哈哈哈哈\*/。可是美中不足的就是这是nodejs，我一个phper当然想用php来实现。所以直接照搬了[@Binaryify](https://binaryify.github.io/NeteaseCloudMusicApi/)大大的接口，改成了PHP版本。也方便日后phper直接来使用。
